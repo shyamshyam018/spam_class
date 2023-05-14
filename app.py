@@ -2,7 +2,7 @@ import pickle
 import streamlit as st
 
 # Load the trained model from a saved file
-model = pickle.load(open('trained_model.sav', 'rb'))
+model = pickle.load(open('spam_classifier.sav', 'rb'))
 
 # Create a Streamlit app that accepts user input and displays the predicted spam classification
 def main():
