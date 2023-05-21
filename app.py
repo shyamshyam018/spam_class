@@ -9,7 +9,7 @@ model = joblib.load('email_class.sav')
 
 # Load the dataset from the CSV file
 df = pd.read_csv('final_dataset.csv', encoding='latin-1')
-)
+
 
 # Extract the email texts and labels from the dataset
 emails = df['Email'].tolist()
