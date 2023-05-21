@@ -25,7 +25,7 @@ vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 # Landing page
 st.markdown("# Email Classification Web App")
-st.markdown("This web app classifies emails as spam or not spam.")
+st.markdown("This Web App is capable of classifying the emails as spam , fraud , important and normal")
 
 # Sidebar for navigation
 with st.sidebar:
