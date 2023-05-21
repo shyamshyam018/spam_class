@@ -57,8 +57,7 @@ elif selected == 'Description':
     # Methodology
     st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
 
-    # Other information
-    st.write('Additional information about the project and its features can be added here.')
+
 
 # About Us Page
 elif selected == 'About Us':
