@@ -36,7 +36,7 @@ if selected == 'Email Classification':
     st.title('Email Classification')
 
     # Input text box
-    user_input = st_text_area(label='Enter the email text', height=200, key='email_input')
+    user_input = st.text_area('Enter the email text', height=200)
 
     # Classify button
     if st.button('Classify'):
