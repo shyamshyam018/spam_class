@@ -107,4 +107,4 @@ elif selected == 'Important Email Detection':
             input_vector = vectorizer.transform([message])
 
             # Make predictions
-            important_prediction = model.predict(input_vector)[
+            important_prediction = model.predict(input_vector)
