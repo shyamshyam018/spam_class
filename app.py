@@ -27,7 +27,7 @@ vectorizer = joblib.load('tfidf_vectorizer.pkl')
 with st.sidebar:
     selected = st.selectbox(
         'NAVIGATION',
-        ('Email Classification', 'Description', 'About Us')
+        ('EMAIL CLASSIFICATION', 'DESCRIPTION', 'ABOUT US')
     )
 
 # Email Classification Page
