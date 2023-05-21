@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 
 # Load the entire dataset from the CSV file
-data = pd.read_csv('dataset.csv')
+data = pd.read_csv('final_dataset.csv')
 
 # Filter the dataset for the three classes
 fraud_data = data[data['Label'] == 'FRAUD'][:1000]
