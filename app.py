@@ -38,10 +38,8 @@ if selected == 'Email Classification':
     # Input text box
     user_input = st.text_area('Enter the email text', height=200)
 
-    # Classify and Clear buttons
-    classify, clear = st.beta_columns(2)
-
-    if classify.button('Classify'):
+    # Classify button
+    if st.button('Classify'):
         # Transform user input using the vectorizer
         input_vector = vectorizer.transform([user_input])
 
@@ -51,9 +49,6 @@ if selected == 'Email Classification':
         # Display the predicted class
         st.success(f'The email is classified as: {email_class}')
 
-    if clear.button('Clear'):
-        user_input = ''
-
 # Description Page
 elif selected == 'Description':
     # Page title
@@ -62,6 +57,8 @@ elif selected == 'Description':
     # Methodology
     st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
 
+
+
 # About Us Page
 elif selected == 'About Us':
     # Page title
@@ -69,6 +66,6 @@ elif selected == 'About Us':
 
     # Description
     st.write("Meet the team:")
-    st.write("👩‍💼 Chandrika M- Btech IT")
-    st.write("👩‍💼 Akila S- Btech IT")
+    st.write("👩‍💼 Chandrika - Btech IT")
+    st.write("👩‍💼 Akila - Btech IT")
     st.write("👩‍💼 Swathi - Btech IT")
