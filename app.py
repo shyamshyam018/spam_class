@@ -25,14 +25,14 @@ vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 # Landing page
 st.markdown("# Email Classification Web App")
-st.markdown("This Web App is capable of classifying the emails as spam , fraud , important and normal")
+st.markdown("This web app can classify emails as fraud, spam, normal, or important.")
 
 # Sidebar for navigation
 with st.sidebar:
     st.markdown("## Navigation")
     selected = st.selectbox(
         'Select an option',
-        ('Email Classification', 'Spam Detection')
+        ('Email Classification', 'Spam Detection', 'Fraud Detection', 'Important Email Detection')
     )
 
 # Email Classification Page
@@ -41,18 +41,19 @@ if selected == 'Email Classification':
     st.title('Email Classification')
 
     # Input text box
-    user_input = st.text_area('Enter the email text', height=200)
+    user_input = st.text_area('Enter the email text', height=200, key='email_input')
 
     # Classify button
-    if st.button('Classify'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([user_input])
+    if st.button('Classify') or st.session_state.enter_pressed:
+        with st.spinner('Classifying...'):
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([user_input])
 
-        # Make predictions
-        email_class = model.predict(input_vector)[0]
+            # Make predictions
+            email_class = model.predict(input_vector)[0]
 
-        # Display the predicted class
-        st.success(f'The email is classified as: {email_class}')
+            # Display the predicted class
+            st.success(f'The email is classified as: {email_class}')
 
 # Spam Detection Page
 elif selected == 'Spam Detection':
@@ -60,15 +61,50 @@ elif selected == 'Spam Detection':
     message = st.text_area('Enter the message')
 
     # Predict button
-    if st.button('Predict'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([message])
+    if st.button('Predict') or st.session_state.enter_pressed:
+        with st.spinner('Predicting...'):
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([message])
 
-        # Make predictions
-        spam_prediction = model.predict(input_vector)[0]
+            # Make predictions
+            spam_prediction = model.predict(input_vector)[0]
 
-        # Display the prediction result
-        if spam_prediction == 1:
-            st.warning('This is a spam message.')
-        else:
-            st.success('This is not a spam message.')
+            # Display the prediction result
+            if spam_prediction == 1:
+                st.warning('This is a spam message.')
+            else:
+                st.success('This is not a spam message.')
+
+# Fraud Detection Page
+elif selected == 'Fraud Detection':
+    # Input text box
+    message = st.text_area('Enter the message')
+
+    # Predict button
+    if st.button('Predict') or st.session_state.enter_pressed:
+        with st.spinner('Detecting fraud...'):
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([message])
+
+            # Make predictions
+            fraud_prediction = model.predict(input_vector)[0]
+
+            # Display the prediction result
+            if fraud_prediction == 1:
+                st.warning('This is a fraudulent message.')
+            else:
+                st.success('This is not a fraudulent message.')
+
+# Important Email Detection Page
+elif selected == 'Important Email Detection':
+    # Input text box
+    message = st.text_area('Enter the message')
+
+    # Predict button
+    if st.button('Predict') or st.session_state.enter_pressed:
+        with st.spinner('Detecting important email...'):
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([message])
+
+            # Make predictions
+            important_prediction = model.predict(input_vector)[
