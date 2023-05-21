@@ -69,6 +69,6 @@ elif selected == 'About Us':
 
     # Description
     st.write("Meet the team:")
-    st.write("👩‍💼 Chandrika - Btech IT")
-    st.write("👩‍💼 Akila - Btech IT")
+    st.write("👩‍💼 Chandrika M- Btech IT")
+    st.write("👩‍💼 Akila S- Btech IT")
     st.write("👩‍💼 Swathi - Btech IT")
