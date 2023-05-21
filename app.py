@@ -2,6 +2,7 @@ import streamlit as st
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
+import time
 
 # Loading the model
 model = joblib.load('email_class.sav')
@@ -36,18 +37,24 @@ if selected == 'Email Classification':
     st.title('Email Classification')
 
     # Input text box
-    user_input = st.text_area('Enter the email text', height=200)
+    user_input = st.text_area('Enter the email text', height=200, key='input_box')
 
     # Classify button
     if st.button('Classify'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([user_input])
+        # Show loading animation
+        with st.spinner('Classifying...'):
+            time.sleep(2)  # Simulate classification time
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([user_input])
 
-        # Make predictions
-        email_class = model.predict(input_vector)[0]
+            # Make predictions
+            email_class = model.predict(input_vector)[0]
 
         # Display the predicted class
         st.success(f'The email is classified as: {email_class}')
+
+        # Clear input box
+        st.text_area('Enter the email text', value='', height=200, key='input_box')
 
 # Description Page
 elif selected == 'Description':
@@ -56,8 +63,6 @@ elif selected == 'Description':
 
     # Methodology
     st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
-
-
 
 # About Us Page
 elif selected == 'About Us':
