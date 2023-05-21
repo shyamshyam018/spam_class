@@ -2,7 +2,7 @@ import streamlit as st
 import joblib
 
 # Load the saved model
-model = joblib.load('spam_class.sav')
+model = joblib.load('email_class.sav')
 
 def main():
     # Streamlit app code goes here
