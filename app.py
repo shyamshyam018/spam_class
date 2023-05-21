@@ -23,13 +23,12 @@ joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
 # Loading the vectorizer
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
-    # Sidebar for navigation
+# Sidebar for navigation
 with st.sidebar:
     selected = st.selectbox(
         'Select an option',
-        ('Email Classification', 'Spam Detection')
+        ('Email Classification', 'Description', 'About Us')
     )
-
 
 # Email Classification Page
 if selected == 'Email Classification':
@@ -50,24 +49,25 @@ if selected == 'Email Classification':
         # Display the predicted class
         st.success(f'The email is classified as: {email_class}')
 
-# Spam Detection Page
-elif selected == 'Spam Detection':
+# Description Page
+elif selected == 'Description':
     # Page title
-    st.title('Spam Detection')
+    st.title('Description')
 
-    # Input text box
-    message = st_text_input(label='Enter the message', key='message_input')
+    # Methodology
+    st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
 
-    # Predict button
-    if st.button('Predict'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([message])
+    # Other information
+    st.write('Additional information about the project and its features can be added here.')
 
-        # Make predictions
-        spam_prediction = model.predict(input_vector)[0]
+# About Us Page
+elif selected == 'About Us':
+    # Page title
+    st.title('About Us')
 
-        # Display the prediction result
-        if spam_prediction == 1:
-            st.warning('This is a spam message.')
-        else:
-            st.success('This is not a spam message.')
+    # Description
+    st.write("Meet the team:")
+    st.write("👩‍💼 Chandrika - Btech IT")
+    st.write("👩‍💼 Akila - Btech IT")
+    st.write("👩‍💼 Swathi - Btech IT")
+
