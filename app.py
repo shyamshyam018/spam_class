@@ -31,4 +31,8 @@ def main():
         st.write("Prediction:", prediction)
 
 if __name__ == '__main__':
+    # Fit the vectorizer with training data
+    training_data = ['final_dataset.csv']  # Add your training data here
+    vectorizer.fit(training_data)
+
     main()
