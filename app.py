@@ -25,20 +25,10 @@ vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 # Sidebar for navigation
 with st.sidebar:
-    st.title("Navigation")
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        if st.button('Email Classification'):
-            selected = 'Email Classification'
-
-    with col2:
-        if st.button('Description'):
-            selected = 'Description'
-
-    with col3:
-        if st.button('About Us'):
-            selected = 'About Us'
+    selected = st.selectbox(
+        'Select an option',
+        ('Email Classification', 'Description', 'About Us')
+    )
 
 # Email Classification Page
 if selected == 'Email Classification':
@@ -66,6 +56,8 @@ elif selected == 'Description':
 
     # Methodology
     st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
+
+
 
 # About Us Page
 elif selected == 'About Us':
