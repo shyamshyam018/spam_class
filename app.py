@@ -55,4 +55,19 @@ elif selected == 'Spam Detection':
     # Page title
     st.title('Spam Detection')
 
-    #
+    # Input text box
+    message = st_text_input(label='Enter the message', key='message_input')
+
+    # Predict button
+    if st.button('Predict'):
+        # Transform user input using the vectorizer
+        input_vector = vectorizer.transform([message])
+
+        # Make predictions
+        spam_prediction = model.predict(input_vector)[0]
+
+        # Display the prediction result
+        if spam_prediction == 1:
+            st.warning('This is a spam message.')
+        else:
+            st.success('This is not a spam message.')
