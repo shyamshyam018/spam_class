@@ -1,10 +1,17 @@
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
+import joblib
+
+# Training and saving the model
+model = ...  # Your trained model
+joblib.dump(model, 'email_class.joblib')
+
+# Loading the model
+model = joblib.load('email_class.joblib')
 
 
-# loading the saved model
-model = pickle.load(open('email_class.sav', 'rb'))
+
 
 # sidebar for navigation
 with st.sidebar:
