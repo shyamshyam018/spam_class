@@ -13,9 +13,16 @@ def main():
 
     # Process user input and make prediction
     if st.button("Predict"):
-        user_input = user_input.reshape(-1, 1)
-        prediction = model.predict([user_input])
-        
+        # Preprocess the input data
+        input_vector = vectorizer.transform([user_input])
+        input_tfidf = tfidf_transformer.transform(input_vector)
+
+        # Reshape the input to a 2D array
+        input_reshaped = input_tfidf.reshape(1, -1)
+
+        # Make prediction
+        prediction = model.predict(input_reshaped)
+
         st.write("Prediction:", prediction)
 
 if __name__ == '__main__':
