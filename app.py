@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
 
 # Loading the model
 model = joblib.load('email_class.sav')
