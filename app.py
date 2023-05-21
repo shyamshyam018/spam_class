@@ -2,7 +2,6 @@ import streamlit as st
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
-from streamlit_text_input import st_text_input
 
 # Loading the model
 model = joblib.load('email_class.sav')
@@ -37,7 +36,7 @@ if selected == 'Email Classification':
     st.title('Email Classification')
 
     # Input text box
-    user_input = st_text_input(label='Enter the email text', height=200, key='email_input')
+    user_input = st_text_area(label='Enter the email text', height=200, key='email_input')
 
     # Classify button
     if st.button('Classify'):
