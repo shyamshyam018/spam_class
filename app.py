@@ -1,46 +1,14 @@
-import streamlit as st
-import joblib
-from sklearn.feature_extraction.text import TfidfVectorizer
-import pandas as pd
+# Landing page
+st.markdown("# Email Classification Web App")
+st.markdown("This web app classifies emails as spam or not spam.")
 
-# Loading the model
-model = joblib.load('email_class.sav')
-
-# Load the dataset from the CSV file
-df = pd.read_csv('final_dataset.csv', encoding='latin-1')
-
-# Extract the email texts and labels from the dataset
-emails = df['Email'].tolist()
-labels = df['Label'].tolist()
-
-# Create and fit the TF-IDF vectorizer
-vectorizer = TfidfVectorizer()
-vectorizer.fit(emails)
-
-# Save the vectorizer
-joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
-
-# Loading the vectorizer
-vectorizer = joblib.load('tfidf_vectorizer.pkl')
-
-    # Sidebar for navigation
+# Sidebar for navigation
 with st.sidebar:
+    st.markdown("## Navigation")
     selected = st.selectbox(
         'Select an option',
         ('Email Classification', 'Spam Detection')
     )
-
-    if selected == 'Spam Detection':
-        st.subheader('Accuracy Levels')
-
-        # Evaluate the model on a validation set or perform cross-validation
-        spam_accuracy = 0.95
-        fraud_accuracy = 0.87
-        normal_accuracy = 0.92
-
-        st.write(f'Spam Accuracy: {spam_accuracy * 100}%')
-        st.write(f'Fraud Accuracy: {fraud_accuracy * 100}%')
-        st.write(f'Normal Accuracy: {normal_accuracy * 100}%')
 
 # Email Classification Page
 if selected == 'Email Classification':
@@ -63,11 +31,8 @@ if selected == 'Email Classification':
 
 # Spam Detection Page
 elif selected == 'Spam Detection':
-    # Page title
-    st.title('Spam Detection')
-
     # Input text box
-    message = st_text_input(label='Enter the message', key='message_input')
+    message = st.text_area('Enter the message')
 
     # Predict button
     if st.button('Predict'):
