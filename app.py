@@ -3,7 +3,7 @@ import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Loading the model
-model = joblib.load('spam_class.sav')
+model = joblib.load('email_class.sav')
 
 # Loading the vectorizer
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
