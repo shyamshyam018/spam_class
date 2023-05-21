@@ -2,14 +2,13 @@ import streamlit as st
 import joblib
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
+from streamlit_text_input import st_text_input
 
 # Loading the model
 model = joblib.load('email_class.sav')
 
-
 # Load the dataset from the CSV file
 df = pd.read_csv('final_dataset.csv', encoding='latin-1')
-
 
 # Extract the email texts and labels from the dataset
 emails = df['Email'].tolist()
@@ -38,7 +37,7 @@ if selected == 'Email Classification':
     st.title('Email Classification')
 
     # Input text box
-    user_input = st.text_area('Enter the email text', height=200)
+    user_input = st_text_input(label='Enter the email text', height=200, key='email_input')
 
     # Classify button
     if st.button('Classify'):
@@ -56,19 +55,4 @@ elif selected == 'Spam Detection':
     # Page title
     st.title('Spam Detection')
 
-    # Input text box
-    message = st.text_area('Enter the message')
-
-    # Predict button
-    if st.button('Predict'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([message])
-
-        # Make predictions
-        spam_prediction = model.predict(input_vector)[0]
-
-        # Display the prediction result
-        if spam_prediction == 1:
-            st.warning('This is a spam message.')
-        else:
-            st.success('This is not a spam message.')
+    #
