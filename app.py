@@ -1,5 +1,17 @@
 import streamlit as st
 import joblib
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+
+# Load the saved model
+model = joblib.load('email_class.sav')
+
+# Initialize vectorizer and tfidf transformer
+vectorizer = CountVectorizer()
+tfidf_transformer = TfidfTransformer()
+
+def main():
+    # Streamlit app code goes here
+
 
 # Load the saved model
 model = joblib.load('email_class.sav')
