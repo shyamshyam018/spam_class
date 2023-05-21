@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
+import joblib
 
 # Load the entire dataset from the CSV file
 data = pd.read_csv('final_dataset.csv')
@@ -28,6 +29,9 @@ train_vectors = vectorizer.fit_transform(train_emails)
 model = LogisticRegression()
 model.fit(train_vectors, train_labels)
 
+# Save the trained model
+joblib.dump(model, 'email_class.sav')
+
 def main():
     # Streamlit app code goes here
     st.title("Custom Text Classification")
@@ -37,6 +41,9 @@ def main():
 
     # Process user input and make prediction
     if st.button("Predict"):
+        # Load the trained model
+        model = joblib.load('email_class.sav')
+
         # Vectorize the user input
         input_vector = vectorizer.transform([user_input])
 
