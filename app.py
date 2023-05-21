@@ -11,13 +11,6 @@ tfidf_transformer = TfidfTransformer()
 
 def main():
     # Streamlit app code goes here
-
-
-# Load the saved model
-model = joblib.load('email_class.sav')
-
-def main():
-    # Streamlit app code goes here
     st.title("Custom ML Model Deployment")
 
     # Input for user
