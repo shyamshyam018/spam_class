@@ -1,24 +1,20 @@
-import pickle
 import streamlit as st
+import joblib
 
-# Load the trained model from a saved file
-model = pickle.load(open('spam_classifier.sav', 'rb'))
+# Load the saved model
+model = joblib.load('model.sav')
 
-# Create a Streamlit app that accepts user input and displays the predicted spam classification
 def main():
-    # Set the app title
-    st.title('Spam Classification App')
-    
-    # Get user input
-    input_text = st.text_area('Enter your email content here:')
-    
-    # Make a prediction using the loaded model
-    if input_text:
-        prediction = model.predict([input_text])
-        if prediction == 1:
-            st.warning('This email is classified as SPAM.')
-        else:
-            st.success('This email is NOT classified as spam.')
+    # Streamlit app code goes here
+    st.title("Custom ML Model Deployment")
+
+    # Input for user
+    user_input = st.text_input("Enter your input:")
+
+    # Process user input and make prediction
+    if st.button("Predict"):
+        prediction = model.predict([user_input])
+        st.write("Prediction:", prediction)
 
 if __name__ == '__main__':
     main()
