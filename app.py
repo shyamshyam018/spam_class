@@ -1,56 +1,82 @@
+import pickle
 import streamlit as st
-import pandas as pd
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.linear_model import LogisticRegression
-import joblib
+from streamlit_option_menu import option_menu
 
-# Load the entire dataset from the CSV file
-data = pd.read_csv('final_dataset.csv')
 
-# Filter the dataset for the three classes
-fraud_data = data[data['Label'] == 'FRAUD'][:1000]
-normal_data = data[data['Label'] == 'NORMAL'][:1000]
-spam_data = data[data['Label'] == 'SPAM'][:1000]
+# loading the saved model
+model = pickle.load(open('email_class.sav', 'rb'))
 
-# Concatenate the data for the three classes
-train_data = pd.concat([fraud_data, normal_data, spam_data])
+# sidebar for navigation
+with st.sidebar:
+    selected_category = option_menu('Email Classification System',
+                                    ['Spam', 'Fraud', 'Normal'],
+                                    icons=['exclamation', 'ban', 'check'],
+                                    default_index=0)
 
-# Split the dataset into training and testing sets
-train_emails = train_data['Email']
-train_labels = train_data['Label']
+# Category Selection Page
+if selected_category == 'Spam':
+    # page title
+    st.title('Spam Classification using ML')
 
-# Create a TF-IDF vectorizer
-vectorizer = TfidfVectorizer()
+    # getting the input data from the user
+    user_input = st.text_input('Enter an email')
 
-# Vectorize the training data
-train_vectors = vectorizer.fit_transform(train_emails)
+    # code for prediction
+    spam_diagnosis = ''
 
-# Train the model
-model = LogisticRegression()
-model.fit(train_vectors, train_labels)
+    # creating a button for prediction
+    if st.button('Classify Email'):
+        spam_prediction = model.predict([user_input])
 
-# Save the trained model
-joblib.dump(model, 'email_class.sav')
+        if spam_prediction[0] == 'SPAM':
+            spam_diagnosis = 'The email is classified as SPAM'
+        else:
+            spam_diagnosis = 'The email is not classified as SPAM'
 
-def main():
-    # Streamlit app code goes here
-    st.title("Custom Text Classification")
+    st.success(spam_diagnosis)
 
-    # Input for user
-    user_input = st.text_input("Enter your input:")
 
-    # Process user input and make prediction
-    if st.button("Predict"):
-        # Load the trained model
-        model = joblib.load('email_class.sav')
+# Category Selection Page
+if selected_category == 'Fraud':
+    # page title
+    st.title('Fraud Classification using ML')
 
-        # Vectorize the user input
-        input_vector = vectorizer.transform([user_input])
+    # getting the input data from the user
+    user_input = st.text_input('Enter an email')
 
-        # Make prediction
-        prediction = model.predict(input_vector)
+    # code for prediction
+    fraud_diagnosis = ''
 
-        st.write("Prediction:", prediction)
+    # creating a button for prediction
+    if st.button('Classify Email'):
+        fraud_prediction = model.predict([user_input])
 
-if __name__ == '__main__':
-    main()
+        if fraud_prediction[0] == 'FRAUD':
+            fraud_diagnosis = 'The email is classified as FRAUD'
+        else:
+            fraud_diagnosis = 'The email is not classified as FRAUD'
+
+    st.success(fraud_diagnosis)
+
+
+# Category Selection Page
+if selected_category == 'Normal':
+    # page title
+    st.title('Normal Classification using ML')
+
+    # getting the input data from the user
+    user_input = st.text_input('Enter an email')
+
+    # code for prediction
+    normal_diagnosis = ''
+
+    # creating a button for prediction
+    if st.button('Classify Email'):
+        normal_prediction = model.predict([user_input])
+
+        if normal_prediction[0] == 'NORMAL':
+            normal_diagnosis = 'The email is classified as NORMAL'
+        else:
+            normal_diagnosis = 'The email is not classified as NORMAL'
+
+    st.success(normal_diagnosis)
