@@ -46,8 +46,14 @@ if selected == 'Email Classification':
         # Make predictions
         email_class = model.predict(input_vector)[0]
 
-        # Display the predicted class
-        st.success(f'The email is classified as: {email_class}')
+        # Set color based on classification result
+        if email_class == 'normal' or email_class == 'important':
+            color = 'green'
+        else:
+            color = 'red'
+
+        # Display the predicted class with color
+        st.markdown(f'<font color={color}>The email is classified as: {email_class}</font>', unsafe_allow_html=True)
 
 # Description Page
 elif selected == 'Description':
@@ -56,8 +62,6 @@ elif selected == 'Description':
 
     # Methodology
     st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
-
-
 
 # About Us Page
 elif selected == 'About Us':
