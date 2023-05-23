@@ -24,34 +24,40 @@ joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 # Description Page
-if st.button('Get Started'):
-    # Page title
-    st.title('Email Classification')
+st.title('Email Classification Model')
+st.write('This model classifies emails into different categories based on their content and characteristics.')
 
-    # Input text box
-    user_input = st.text_area('Enter the email text', height=200)
+# Get Started button
+col1, col2, col3 = st.beta_columns([1, 6, 1])
+with col2:
+    if st.button('Get Started'):
+        # Email Classification Page
+        st.title('Email Classification')
+        
+        # Input text box
+        user_input = st.text_area('Enter the email text', height=200)
+        
+        # Classify button
+        if st.button('Classify'):
+            # Transform user input using the vectorizer
+            input_vector = vectorizer.transform([user_input])
+            
+            # Make predictions
+            email_class = model.predict(input_vector)[0]
+            
+            # Display the predicted class with color
+            if email_class in ['SPAM', 'FRAUD']:
+                st.error('The email is classified as: spam')
+            else:
+                st.success('The email is classified as: {}'.format(email_class))
 
-    # Classify button
-    if st.button('Classify'):
-        # Transform user input using the vectorizer
-        input_vector = vectorizer.transform([user_input])
-
-        # Make predictions
-        email_class = model.predict(input_vector)[0]
-
-        # Display the predicted class with color
-        if email_class in ['SPAM', 'FRAUD']:
-            st.error('The email is classified as: spam')
-        else:
-            st.success('The email is classified as: {}'.format(email_class))
-
-# About Us Page
+# About Us button
 if st.button('About Us'):
     # Page title
     st.title('About Us')
-
+    
     # Description
     st.write("Meet the team:")
     st.write("👩‍💼 Chandrika - Btech IT")
     st.write("👩‍💼 Akila - Btech IT")
-    st.write("👩‍💼 Swathi - Btech IT") 
+    st.write("👩‍💼 Swathi - Btech IT")
