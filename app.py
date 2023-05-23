@@ -47,7 +47,7 @@ if selected == 'Email Classification':
         email_class = model.predict(input_vector)[0]
 
         # Display the predicted class with color
-        if email_class in ['spam', 'fraud']:
+        if email_class in ['SPAM', 'FRAUD']:
             st.error('The email is classified as: spam')
         else:
             st.success('The email is classified as: {}'.format(email_class))
