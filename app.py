@@ -23,41 +23,50 @@ joblib.dump(vectorizer, 'tfidf_vectorizer.pkl')
 # Loading the vectorizer
 vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
+# Sidebar for navigation
+with st.sidebar:
+    selected = st.selectbox(
+        'Select an option',
+        ('Email Classification', 'Description', 'About Us')
+    )
+
+# Email Classification Page
+if selected == 'Email Classification':
+    # Page title
+    st.title('Email Classification')
+
+    # Input text box
+    user_input = st.text_area('Enter the email text', height=200)
+
+    # Classify button
+    if st.button('Classify'):
+        # Transform user input using the vectorizer
+        input_vector = vectorizer.transform([user_input])
+
+        # Make predictions
+        email_class = model.predict(input_vector)[0]
+
+        # Display the predicted class with color
+        if email_class in ['SPAM', 'FRAUD']:
+            st.error('The email is classified as: spam')
+        else:
+            st.success('The email is classified as: {}'.format(email_class))
+
 # Description Page
-st.title('Email Classification Model')
-st.write('This model classifies emails into different categories based on their content and characteristics.')
+elif selected == 'Description':
+    # Page title
+    st.title('Description')
 
-# Get Started button
-col1, col2, col3 = st.beta_columns([1, 6, 1])
-with col2:
-    if st.button('Get Started'):
-        # Email Classification Page
-        st.title('Email Classification')
-        
-        # Input text box
-        user_input = st.text_area('Enter the email text', height=200)
-        
-        # Classify button
-        if st.button('Classify'):
-            # Transform user input using the vectorizer
-            input_vector = vectorizer.transform([user_input])
-            
-            # Make predictions
-            email_class = model.predict(input_vector)[0]
-            
-            # Display the predicted class with color
-            if email_class in ['SPAM', 'FRAUD']:
-                st.error('The email is classified as: spam')
-            else:
-                st.success('The email is classified as: {}'.format(email_class))
+    # Methodology
+    st.write('This project uses a Multinomial Naive Bayes classifier for email classification. The text of the email is transformed using a TF-IDF vectorizer and then fed into the classifier to predict the class of the email.')
 
-# About Us button
-if st.button('About Us'):
+# About Us Page
+elif selected == 'About Us':
     # Page title
     st.title('About Us')
-    
+
     # Description
     st.write("Meet the team:")
     st.write("👩‍💼 Chandrika - Btech IT")
     st.write("👩‍💼 Akila - Btech IT")
-    st.write("👩‍💼 Swathi - Btech IT")
+    st.write("👩‍💼 Swathi - Btech IT") 
