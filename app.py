@@ -47,7 +47,7 @@ if selected == 'Email Classification':
         email_class = model.predict(input_vector)[0]
 
         # Display the predicted class with color
-        if email_class == 'normal' or email_class == 'important':
+        if email_class == 'NORMAL' or email_class == 'IMPORTANT':
             st.success('The email is classified as: {}'.format(email_class))
         else:
             st.error('The email is classified as: {}'.format(email_class))
