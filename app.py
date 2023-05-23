@@ -1,5 +1,6 @@
 import streamlit as st
 import joblib
+import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 
@@ -45,6 +46,10 @@ if selected == 'Email Classification':
 
         # Make predictions
         email_class = model.predict(input_vector)[0]
+
+        # Print random label if detected class is normal
+        if email_class == 'NORMAL':
+            email_class = random.choice(['NORMAL', 'NORMAL'])
 
         # Display the predicted class with color
         if email_class == 'NORMAL' or email_class == 'IMPORTANT':
