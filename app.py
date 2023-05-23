@@ -46,14 +46,11 @@ if selected == 'Email Classification':
         # Make predictions
         email_class = model.predict(input_vector)[0]
 
-        # Set color based on classification result
-        if email_class == 'normal' or email_class == 'important':
-            color = 'green'
-        else:
-            color = 'red'
-
         # Display the predicted class with color
-        st.markdown(f'<font color={color}>The email is classified as: {email_class}</font>', unsafe_allow_html=True)
+        if email_class == 'normal' or email_class == 'important':
+            st.success('The email is classified as: {}'.format(email_class))
+        else:
+            st.error('The email is classified as: {}'.format(email_class))
 
 # Description Page
 elif selected == 'Description':
