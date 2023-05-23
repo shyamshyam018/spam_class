@@ -49,11 +49,11 @@ if selected == 'Email Classification':
 
         # Print random label if detected class is normal
         if email_class == 'NORMAL':
-            email_class = random.choice(['NORMAL', 'NORMAL'])
+            email_class1 = random.choice(['NORMAL', 'NORMAL'])
 
         # Display the predicted class with color
         if email_class == 'NORMAL' or email_class == 'IMPORTANT':
-            st.success('The email is classified as: {}'.format(email_class))
+            st.success('The email is classified as: {}'.format(email_class1))
         else:
             st.error('The email is classified as: {}'.format(email_class))
 
